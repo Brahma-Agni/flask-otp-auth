@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+
+{% block title %}Verify OTP{% endblock %}
+
+{% block content %}
+<div class="card">
+    <div class="card-header text-center">
+        <h2>Verify One-Time Password</h2>
+    </div>
+    <div class="card-body">
+        <p class="text-center">A 6-digit OTP has been sent to <strong>{{ otp_email }}</strong>. Please enter it below.</p>
+        <form method="POST">
+            {{ form.hidden_tag() }}
+            <div class="form-group">
+                {{ form.otp.label(class="form-control-label") }}
+                {{ form.otp(class="form-control" + (' is-invalid' if form.otp.errors else ''), placeholder="e.g., 123456") }}
+                {% if form.otp.errors %}
+                    <div class="invalid-feedback">
+                        {% for error in form.otp.errors %}
+                            <span>{{ error }}</span>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+            </div>
+            <div class="form-group text-center">
+                {{ form.submit(class="btn btn-success btn-lg") }}
+            </div>
+        </form>
+        <hr>
+        <p class="text-center">Didn't receive the OTP? <a href="{{ url_for('send_otp') }}">Request a new one</a>.</p>
+    </div>
+</div>
+{% endblock %}

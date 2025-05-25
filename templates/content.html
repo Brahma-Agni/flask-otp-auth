@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+{% block title %}Protected Content{% endblock %}
+
+{% block content %}
+<div class="card">
+    <div class="card-header text-center">
+        <h2>Welcome to Your Protected Content!</h2>
+    </div>
+    <div class="card-body">
+        <p class="lead">Hello, {% if viewer_email %}{{ viewer_email }}{% else %}Guest{% endif %}!</p>
+        <p>This is the super secret content that only authenticated users can see.</p>
+        <p>Your login is tied to this browser session. If you close your browser or log out, you'll need to request a new OTP to access this content again.</p>
+        <hr>
+        <div class="text-center">
+            <a href="{{ url_for('logout') }}" class="btn btn-danger">Log Out</a>
+            <a href="https://flask.palletsprojects.com/en/latest/" target="_blank" class="btn btn-info ml-2">Learn more about Flask</a>
+        </div>
+    </div>
+</div>
+{% endblock %}
